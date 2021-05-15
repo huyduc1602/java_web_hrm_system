@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorator="~{/main-layout}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chức vụ</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>Thêm chức vụ</h1>
+					</div>
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active">Thêm chức vụ</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+		<form th:action="@{/createPosition}" th:object="${position}" method="post">
+		<input type="hidden"  id="pos_id" th:field="*{posId}" th:value="*{posId}">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card card-primary">
+						<div class="card-header">
+							<h3 class="card-title">Bắt buộc</h3>
+
+							<div class="card-tools">
+								<button type="button" class="btn btn-tool"
+									data-card-widget="collapse" title="Collapse">
+									<i class="fas fa-minus"></i>
+								</button>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="form-group">
+								<label for="de_name">Tên chức vụ</label> 
+								<input type="text"
+										id="pos_name" th:field="*{posName}" class="form-control">
+								<span th:if="${#fields.hasErrors('posName')}" th:errors="*{posName}" class="text-danger"></span>
+								</div>
+							
+							<div class="form-group">
+								<label for="pos_code">Mã chức vụ</label>
+								<input
+									type="text" id="pos_code" th:field="*{posCode}" class="form-control">
+								<span th:if="${#fields.hasErrors('posCode')}" th:errors="*{posCode}" class="text-danger"></span>
+							</div>
+						
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				
+				</div>
+				<div class="col-md-6">
+					<div class="card card-secondary">
+						<div class="card-header">
+							<h3 class="card-title">Bổ sung</h3>
+
+							<div class="card-tools">
+								<button type="button" class="btn btn-tool"
+									data-card-widget="collapse" title="Collapse">
+									<i class="fas fa-minus"></i>
+								</button>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="form-group">
+								<label for="pos_desc">Mô tả</label>
+								<textarea id="pos_desc" th:field="*{posDesc}" class="form-control" rows="4"></textarea>
+								 <span th:if="${#fields.hasErrors('posDesc')}" th:errors="*{posDesc}" class="text-danger"></span>
+							</div>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<a href="/positions" class="btn btn-secondary">Hủy</a> 
+					<input type="submit"
+						value="Lưu" class="btn btn-success float-right">
+						
+				</div>
+			</div>
+			</form>
+		</section>
+	</div>
+</body>
+</html>

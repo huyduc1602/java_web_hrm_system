@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+   <form action="#" th:action="@{/query/submitQuery}" th:object="${wrapper}" method="post">
+
+      <table class="table table-bordered table-hover table-striped">
+         <thead>
+            <tr>
+               <th>Select</th>
+               <th>Client ID</th>
+               <th>IP Addresss</th>
+               <th>Description</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr th:each="currentClient, stat : ${wrapper.clientList}">
+               <td><input type="checkbox" th:name="|clientList[${stat.index}].clientID|"
+                  th:value="${currentClient.getDeId()}" th:checked="${currentClient.selected}" /></td>
+               <td th:text="${currentClient.getDeId()}"></td>
+               <td th:text="${currentClient.getDeName()}"></td>
+               <td th:text="${currentClient.getDeCode()}"></td>
+               <td th:text="${currentClient.getDeDesc()}"></td>
+            </tr>
+         </tbody>
+      </table>
+      <button type="submit" value="submit" class="btn btn-success">Submit</button>
+   </form>
+
+</body>
+</html>

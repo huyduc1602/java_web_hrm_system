@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorator="~{/main-layout}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nhân viên</title>
+
+
+</head>
+<body>
+	<div layout:fragment="content">
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>Nhân viên</h1>
+						<a class="btn btn-primary" href="/employees/add">Thêm mới</a>
+					</div>
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active">Nhân viên</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- Main content -->
+		<section class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Danh sách nhân viên được quản lý</h3>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<div id="example2_wrapper"
+									class="dataTables_wrapper dt-bootstrap4">
+									<div class="row">
+										<div class="col-sm-12 col-md-6"></div>
+										<div class="col-sm-12 col-md-6"></div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12 table-responsive">
+											<table id="example2"
+												class="table table-bordered table-hover dataTable dtr-inline"
+												role="grid" aria-describedby="example2_info">
+												<thead>
+													<tr role="row">
+														<th class="sorting sorting_asc" tabindex="0"
+															aria-controls="example2" rowspan="1" colspan="1"
+															aria-sort="ascending"
+															aria-label="Rendering engine: activate to sort column descending">Họ tên</th>
+														<th class="sorting" tabindex="0" aria-controls="example2"
+															rowspan="1" colspan="1"
+															aria-label="Browser: activate to sort column ascending">Ngày sinh</th>
+														<th class="sorting" tabindex="0" aria-controls="example2"
+															rowspan="1" colspan="1"
+															aria-label="Platform(s): activate to sort column ascending">Giới tính</th>
+														<th class="sorting" tabindex="0" aria-controls="example2"
+															rowspan="1" colspan="1"
+															aria-label="Engine version: activate to sort column ascending">Địa chỉ</th>
+														<th class="sorting" tabindex="0" aria-controls="example2"
+															rowspan="1" colspan="1"
+															aria-label="Engine version: activate to sort column ascending">Ngày bắt đầu</th>
+														<th class="sorting" tabindex="0" aria-controls="example2"
+															rowspan="1" colspan="1"
+															aria-label="Engine version: activate to sort column ascending">Ngày kết thúc</th>
+														<th class="sorting" tabindex="0" aria-controls="example2"
+															rowspan="1" colspan="1"
+															aria-label="Engine version: activate to sort column ascending">Thành tích</th>
+														<th class="sorting" tabindex="0" aria-controls="example2"
+															rowspan="1" colspan="1"
+															aria-label="Engine version: activate to sort column ascending">It</th>
+														<th class="sorting" tabindex="0" aria-controls="example2"
+															rowspan="1" colspan="1"
+															aria-label="Engine version: activate to sort column ascending">Ngôn ngữ</th>
+														<th class="sorting" tabindex="0" aria-controls="example2"
+															rowspan="1" colspan="1"
+															aria-label="Engine version: activate to sort column ascending">Chuyên ngành</th>
+														<th class="text-center" tabindex="0" aria-controls="example2"
+															rowspan="1" colspan="1"
+															aria-label="CSS grade: activate to sort column ascending">Thao tác</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr class="odd"  th:each="employee,i: ${employeeList}">
+														<td class="dtr-control sorting_1" tabindex="0" th:text="${employee.name}"></td>
+														<td th:text="${#calendars.format(employee.birthday,'dd/MM/yyyy')}"></td>
+														<td th:switch="${employee.general}">
+														<p th:case="0">Nam</p>
+														<p th:case="1">Nữ</p>
+														<p th:case="*">Khác</p>
+														</td>
+														<td class="dtr-control sorting_1" tabindex="0" th:text="${employee.address}"></td>
+														<td th:text="${#calendars.format(employee.startDate,'dd/MM/yyyy')}"></td>
+														<td th:text="${#calendars.format(employee.endDate,'dd/MM/yyyy')}"></td>
+														<td th:text="${employee.result}"></td>
+														<td th:text="${employee.it}"></td>
+														<td th:text="${employee.language}"></td>
+														<td th:text="${employee.major}"></td>
+														<td class="project-actions text-right d-flex"><a
+															class="btn btn-primary btn-sm mx-1" th:href="@{employees/view/{id}(id= ${employee.emId})}"> <i
+																class="fas fa-folder"> </i> Xem
+														</a> <a class="btn btn-info btn-sm mx-1" th:href="@{/employees/update/{id}(id= ${employee.emId})}"> <i
+																class="fas fa-pencil-alt"> </i> Sửa
+														</a> <a class="btn btn-danger btn-sm mx-1" th:href="@{/employees/delete/{id}(id= ${employee.emId})}"> <i
+																class="fas fa-trash"> </i> Xóa
+														</a></td>
+													</tr>
+													
+												</tbody>
+												<tfoot>
+													<tr>
+														<th rowspan="1" colspan="1">Họ tên</th>
+														<th rowspan="1" colspan="1">Ngày sinh</th>
+														<th rowspan="1" colspan="1">Giới tính</th>
+														<th rowspan="1" colspan="1">Địa chỉ</th>
+														<th rowspan="1" colspan="1">Ngày bắt đầu</th>
+														<th rowspan="1" colspan="1">Ngày kết thúc</th>
+														<th rowspan="1" colspan="1">Thành tích</th>
+														<th rowspan="1" colspan="1">It</th>
+														<th rowspan="1" colspan="1">Ngôn ngữ</th>
+														<th rowspan="1" colspan="1">Chuyên ngành</th>
+														<th rowspan="1" colspan="1">Thao tác</th>
+													</tr>
+												</tfoot>
+											</table>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12 col-md-5">
+											<div class="dataTables_info" id="example2_info" role="status"
+												aria-live="polite">Hiển thị từ 1 đến 10 của 57 kết quả</div>
+										</div>
+										<div class="col-sm-12 col-md-7">
+											<div class="dataTables_paginate paging_simple_numbers"
+												id="example2_paginate">
+												<ul class="pagination">
+													<li class="paginate_button page-item previous disabled"
+														id="example2_previous"><a href="#"
+														aria-controls="example2" data-dt-idx="0" tabindex="0"
+														class="page-link">Trước</a></li>
+													<li class="paginate_button page-item active"><a
+														href="#" aria-controls="example2" data-dt-idx="1"
+														tabindex="0" class="page-link">1</a></li>
+													<li class="paginate_button page-item "><a href="#"
+														aria-controls="example2" data-dt-idx="2" tabindex="0"
+														class="page-link">2</a></li>
+													<li class="paginate_button page-item "><a href="#"
+														aria-controls="example2" data-dt-idx="3" tabindex="0"
+														class="page-link">3</a></li>
+													<li class="paginate_button page-item "><a href="#"
+														aria-controls="example2" data-dt-idx="4" tabindex="0"
+														class="page-link">4</a></li>
+													<li class="paginate_button page-item "><a href="#"
+														aria-controls="example2" data-dt-idx="5" tabindex="0"
+														class="page-link">5</a></li>
+													<li class="paginate_button page-item "><a href="#"
+														aria-controls="example2" data-dt-idx="6" tabindex="0"
+														class="page-link">6</a></li>
+													<li class="paginate_button page-item next"
+														id="example2_next"><a href="#"
+														aria-controls="example2" data-dt-idx="7" tabindex="0"
+														class="page-link">Sau</a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.card-body -->
+						</div>
+						<!-- /.card -->
+
+
+						<!-- /.card -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
+	</div>
+</body>
+</html>

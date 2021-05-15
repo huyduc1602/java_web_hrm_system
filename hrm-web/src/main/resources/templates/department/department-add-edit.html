@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorator="~{/main-layout}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phòng ban</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<section class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>Chi tiết phòng ban</h1>
+					</div>
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active">Chi tiết phòng ban</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+		<form th:action="@{/createDepartment}"  th:object="${department}" method="POST">
+			<input type="hidden" id="de_id" th:field="*{deId}" th:value="*{deId}">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card card-primary">
+						<div class="card-header">
+							<h3 class="card-title">Bắt buộc</h3>
+
+							<div class="card-tools">
+								<button type="button" class="btn btn-tool"
+									data-card-widget="collapse" title="Collapse">
+									<i class="fas fa-minus"></i>
+								</button>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="form-group">
+								<label for="de_name">Tên phòng ban</label> 
+								<input type="text" 
+									id="de_name" th:field="*{deName}" class="form-control">
+									<span th:if="${#fields.hasErrors('deName')}" th:errors="*{deName}" class="text-danger"></span>
+							</div>
+							
+							<div class="form-group">
+								<label for="de_code">Mã phòng ban</label>
+								<input
+									type="text" id="de_code" th:field="*{deCode}" class="form-control">
+								<span th:if="${#fields.hasErrors('deCode')}" th:errors="*{deCode}" class="text-danger"></span>
+							</div>
+						
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				
+				</div>
+				<div class="col-md-6">
+					<div class="card card-secondary">
+						<div class="card-header">
+							<h3 class="card-title">Bổ sung</h3>
+
+							<div class="card-tools">
+								<button type="button" class="btn btn-tool"
+									data-card-widget="collapse" title="Collapse">
+									<i class="fas fa-minus"></i>
+								</button>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="form-group">
+								<label for="de_desc">Mô tả</label>
+								<textarea id="de_desc" th:field="*{deDesc}" class="form-control" rows="4"></textarea>
+								 <span th:if="${#fields.hasErrors('deDesc')}" th:errors="*{deDesc}" class="text-danger"></span>
+							</div>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<a href="/departments" class="btn btn-secondary">Hủy</a> 
+					<input type="submit"
+						value="Lưu" class="btn btn-success float-right">
+						
+				</div>
+			</div>
+			</form>
+		</section>
+	</div>
+</body>
+</html>
